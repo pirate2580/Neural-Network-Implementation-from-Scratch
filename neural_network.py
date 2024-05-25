@@ -141,6 +141,8 @@ class NN:
             function = self.layer_type(self.structure[l][0])
             if function is not None:
               A = function.activation(Z_l)
+            else:
+              A = Z_l
            
         return A
     
@@ -174,6 +176,8 @@ class NN:
             function = self.layer_type(self.structure[l][0])
             if function is not None:
               A = function.activation(Z_l)
+            else:
+               A = Z_l
             
             A_cache["A" + str(l)] = np.copy(A)
         
@@ -225,9 +229,9 @@ if __name__ == '__main__':
   doctest.testmod()
   import matplotlib.pyplot as plt
   X = np.array([[1, 0, 1], [0, 1, 0], [0, -1, 0], [-1, 0, -1]])
-  neural_network = NN([('input', 4),('sigmoid', 1)], 'MeanSquaredError')
-  neural_network.weight['W1'] = np.array([[1., 1., 1., 1.]])
-  neural_network.bias['b1'] = np.array([[0., 0., 0.]])
+  neural_network = NN([('input', 4),('sigmoid', 4), ('none', 1)], 'MeanSquaredError')
+  # neural_network.weight['W1'] = np.array([[1., 1., 1., 1.]])
+  # neural_network.bias['b1'] = np.array([[0., 0., 0.]])
   Y = [[1, 0, 1]]
   iters = 100
   # You will see that the cost goes down gradually
